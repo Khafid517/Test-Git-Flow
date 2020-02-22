@@ -1,13 +1,16 @@
+require("dotenv").config()
+
 const express = require('express')
 const app = express()
 
-app.get('/', (req, res) => {
-    res.json({
-        message: "WELCOME :v"
-    })
-})
+const user = require("./api/user/router.User")
+// const itemRouter = require("./api/item/item.router")
 
-app.listen(process.env.APP_PORT, () => {
-    console.log('App listening on port ' + process.env.APP_PORT + ' !');
-})
+app.use(express.json())
 
+app.use("/user", user)
+// app.use("/api/items", itemRouter)
+
+app.listen(process.env.APP_PORT, ()=>{
+    console.log("running on port" + process.env.APP_PORT)
+})
